@@ -2,6 +2,10 @@ body {
   font-family: sans-serif;
 }
 
+p {
+  margin: 0;
+}
+
 input {
   border-radius: 16px;
   border: none;
