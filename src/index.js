@@ -15,17 +15,43 @@ const onClickAdd = () => {
   p.className = "todo-string";
   p.innerText = inputText;
 
+  // 完了ボタン
   const completeButton = document.createElement("button");
   completeButton.innerText = "完了";
   completeButton.addEventListener("click", () => {
-    alert("完了")
-  });
+    deleteFromIncompleteList(div.parentNode);
 
+    // TODO内容の取得
+    const addTarget = div.parentNode;
+    const text = p.innerText;
+
+    addTarget.textContent = null;
+
+    const div2 = document.createElement("div");
+    div2.className = "list-row";
+
+    const p2 = document.createElement("p");
+    p2.className = "todo-string";
+    p2.innerText = text;
+
+    const backButton = document.createElement("button");
+    backButton.innerText = "戻す";
+    backButton.addEventListener("click", () => {
+      document.getElementById("complete-list").removeChild(div2.parentNode);
+    })
+
+    div2.appendChild(p2);
+    div2.appendChild(backButton);
+    addTarget.appendChild(div2);
+
+    document.getElementById("complete-list").appendChild(addTarget);
+
+  });
+// 削除ボタン
   const deleteButton = document.createElement("button");
   deleteButton.innerText = "削除";
   deleteButton.addEventListener("click", () => {
-    const deleteTarget = div.parentNode;
-    document.getElementById("incomplete-list").removeChild(deleteTarget);
+    deleteFromIncompleteList(div.parentNode);
   });
 
   div.appendChild(p);
@@ -34,6 +60,10 @@ const onClickAdd = () => {
   li.appendChild(div);
 
   document.getElementById("incomplete-list").appendChild(li);
+};
+
+const deleteFromIncompleteList = (target) => {
+  document.getElementById("incomplete-list").removeChild(target);
 };
 
 document
